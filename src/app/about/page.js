@@ -10,6 +10,7 @@ import { pageVariants, pageTransition } from '../../animations';
 
 import myProfilePic from '@/assets/profile-photo.png';
 
+
 const About = () => {
   return (
     <motion.div initial="initial" animate="in" exit="out" variants={pageVariants} transition={pageTransition}>
@@ -44,7 +45,7 @@ const About = () => {
   viewport={{ once: true, amount: 0.3 }}
   transition={{ duration: 0.7 }}
 >
-  <img src={myProfilePic.src} alt="A professional headshot of Shavin Joseph" className="about-image" />
+  <img src={myProfilePic.src} alt="A professional headshot of Shavin Joseph" className="about-image" placeholder="blur"/>
 </motion.div>
 
         </div>
