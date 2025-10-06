@@ -4,6 +4,11 @@ import { motion } from 'framer-motion';
 import { pageVariants, pageTransition } from '../../animations';
 import { templates } from '../../templatesData'; // Import your templates
 
+
+export const metadata = {
+  title: 'Website Templates',
+  description: 'Discover professionally designed, developer-ready website templates for businesses, creatives, and agencies, created by Shavin Joseph.',
+};
 const Templates = () => {
   return (
 

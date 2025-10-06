@@ -4,7 +4,10 @@ import { motion } from 'framer-motion';
 import { pageVariants, pageTransition } from '../../animations';
 import { projects } from '../../projectData';
 
-
+export const metadata = {
+  title: 'My Work',
+  description: 'A curated selection of professional web development, software, and design projects by Shavin Joseph.',
+};
 const Work = () => {
   return (
     <motion.div initial="initial" animate="in" exit="out" variants={pageVariants} transition={pageTransition}>

@@ -10,7 +10,10 @@ import { pageVariants, pageTransition } from '../../animations';
 
 import myProfilePic from '@/assets/profile-photo.png';
 
-
+export const metadata = {
+  title: 'About Me',
+  description: 'Learn about Shavin Joseph, a passionate developer and designer, his mission, his process, and the digital toolkit he uses to bring ideas to life.',
+};
 const About = () => {
   return (
     <motion.div initial="initial" animate="in" exit="out" variants={pageVariants} transition={pageTransition}>

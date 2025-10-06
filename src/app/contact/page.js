@@ -4,6 +4,11 @@ import { motion } from 'framer-motion';
 import { pageVariants, pageTransition } from '../../animations';
 import { FaEnvelope, FaLinkedin, FaGithub, FaFacebook, FaInstagram } from 'react-icons/fa';
 
+
+export const metadata = {
+  title: 'Contact Me',
+  description: 'Get in touch with Shavin Joseph to discuss your next project, collaboration, or job opportunity.',
+};
 const Contact = () => {
   return (
     <motion.div initial="initial" animate="in" exit="out" variants={pageVariants} transition={pageTransition}>
