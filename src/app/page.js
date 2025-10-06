@@ -1,95 +1,89 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client"; // REQUIRED for animations and hooks
+
+import React from 'react';
+import { motion } from 'framer-motion';
+import { TypeAnimation } from 'react-type-animation';
+import { FaCode, FaPaintBrush, FaPalette } from 'react-icons/fa';
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+    <div>
+      {/* Hero Section */}
+      <section className="hero-section">
+        <div className="container">
+          <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+            <h1 className="hero-title">
+              <span className="hero-intro-text">I Build & Design</span>
+              <TypeAnimation
+                sequence={[
+                  'Elegant Code.', 2000,
+                  'Intuitive UI/UX.', 2000,
+                  'Digital Solutions.', 2000,
+                ]}
+                wrapper="span"
+                speed={50}
+                className="hero-dynamic-text"
+                repeat={Infinity}
+              />
+            </h1>
+          </motion.div>
+          <motion.p className="hero-subtitle" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.8 }}>
+            Hi, I'm Shavin Joseph. I specialize in bridging the gap between ambitious ideas and their digital execution, delivering software that is as elegant as it is effective.
+          </motion.p>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* ================================================================== */}
+      {/* Services Section - NOW COMPLETE WITH ANIMATED CARDS */}
+      {/* ================================================================== */}
+      <section className="container services-section">
+        <h2 className="section-title">What I Bring to the Table</h2>
+        <div className="services-grid">
+          
+          {/* Card 1: Development */}
+          <motion.div 
+            className="service-card" 
+            whileHover={{ y: -10, boxShadow: '0 0 25px rgba(0, 198, 255, 0.2)' }} 
+            initial={{ opacity: 0, y: 50 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            viewport={{ once: true, amount: 0.5 }} 
+            transition={{ duration: 0.5 }}
+          >
+            <FaCode className="service-icon" />
+            <h3>Development</h3>
+            <p>Building scalable and robust web applications with clean code and modern architecture.</p>
+          </motion.div>
+
+          {/* Card 2: UI/UX Design */}
+          <motion.div 
+            className="service-card" 
+            whileHover={{ y: -10, boxShadow: '0 0 25px rgba(0, 198, 255, 0.2)' }} 
+            initial={{ opacity: 0, y: 50 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            viewport={{ once: true, amount: 0.5 }} 
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <FaPaintBrush className="service-icon" />
+            <h3>UI/UX Design</h3>
+            <p>Designing user-centric interfaces that are not only beautiful but also intuitive and accessible.</p>
+          </motion.div>
+          
+          {/* Card 3: Graphic Design */}
+          <motion.div 
+            className="service-card" 
+            whileHover={{ y: -10, boxShadow: '0 0 25px rgba(0, 198, 255, 0.2)' }} 
+            initial={{ opacity: 0, y: 50 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            viewport={{ once: true, amount: 0.5 }} 
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <FaPalette className="service-icon" />
+            <h3>Graphic Design</h3>
+            <p>Creating compelling visuals, from posters to social media graphics, that tell a story.</p>
+          </motion.div>
+
+        </div>
+      </section>
     </div>
   );
 }

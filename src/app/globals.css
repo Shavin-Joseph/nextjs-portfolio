@@ -1,42 +1,438 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-sans: 'Poppins', sans-serif;
+  --color-background: #0a0a18; /* Deep, dark navy */
+  --color-surface: #1c1c2e; /* Slightly lighter surface for cards */
+  --color-text: #a0a0c0; /* Soft, lavender-tinted grey */
+  --color-heading: #e0e0ff; /* A bright, almost white for headings */
+  --color-accent: #00c6ff; /* A vibrant, electric blue */
+  --color-accent-dark: #0072ff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: radial-gradient(circle at 10% 20%, rgba(0, 198, 255, 0.1), transparent 35%),
+                    radial-gradient(circle at 90% 80%, rgba(0, 114, 255, 0.1), transparent 35%);
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+h1, h2, h3, h4 {
+  color: var(--color-heading);
+  line-height: 1.2;
+  font-weight: 600;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+
+/*About*/
+.about-container { padding-top: 10rem; padding-bottom: 5rem; }
+.page-title { text-align: center; font-size: 3.5rem; margin-bottom: 4rem; }
+.about-intro { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: center; margin-bottom: 6rem; }
+.about-intro h2 { font-size: 2rem; margin-bottom: 1.5rem; color: var(--color-accent); }
+.about-intro p { margin-bottom: 1rem; }
+.about-image-placeholder {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: var(--color-surface);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-accent);
+}
+.section-title { text-align: center; font-size: 2.5rem; margin-bottom: 1rem; }
+.section-subtitle { text-align: center; max-width: 600px; margin: 0 auto 3rem auto; }
+.tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; }
+.tech-card {
+  background-color: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  font-size: 2.5rem;
+  transition: all 0.3s ease;
+}
+
+.about-image-container {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden; /* This makes the image circular */
+  border: 3px solid var(--color-accent);
+}
+
+.about-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Prevents the image from being stretched */
+}
+.tech-card:hover { transform: translateY(-5px); box-shadow: 0 0 20px rgba(0, 198, 255, 0.2); }
+.tech-card span { font-size: 1rem; font-weight: 500; }
+
+/* ... keep all your existing About.css styles ... */
+
+@media screen and (max-width: 768px) {
+  .about-container {
+    padding-top: 8rem; /* Adjust for smaller header */
+  }
+  
+  .about-intro {
+    grid-template-columns: 1fr; /* Stack the columns */
+    text-align: center;
+  }
+
+
+.about-image-container {
+  width: 100%;
+  max-width: 300px; /* Control the max size */
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden; /* This is what makes the image circular */
+  border: 3px solid var(--color-accent);
+  margin: 0 auto; /* Center it within the grid column */
+}
+
+.about-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Crucial: prevents the image from stretching */
+}
+
+  .about-text {
+    text-align: left; /* Or center, your choice */
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+  }
+
+  .about-intro h2 {
+    font-size: 1.8rem;
   }
 }
+
+/*contact*/
+.contact-container { padding-top: 10rem; padding-bottom: 5rem; text-align: center; }
+.contact-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 4rem;
+}
+.contact-card {
+  background-color: var(--color-surface);
+  padding: 2.5rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  color: var(--color-text);
+  transition: all 0.3s ease;
+}
+.contact-card:hover { border-color: var(--color-accent); color: var(--color-heading); }
+.contact-card svg { font-size: 3rem; color: var(--color-accent); margin-bottom: 1rem; }
+.contact-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+
+/*home*/
+
+/* Hero */
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 80vh;
+  padding-top: 10rem;
+}
+.hero-title {
+  font-size: clamp(3rem, 7vw, 5rem);
+  background: linear-gradient(90deg, var(--color-heading), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+}
+.hero-subtitle { font-size: 1.25rem; max-width: 600px; margin: 0 auto 2.5rem auto; }
+
+/* Services */
+.services-section { padding: 5rem 2rem; }
+.section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+.service-card {
+  background: var(--color-surface);
+  padding: 2.5rem 2rem;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+.service-card:hover { box-shadow: 0 0 25px rgba(0, 198, 255, 0.2); }
+.service-icon { font-size: 3rem; color: var(--color-accent); margin-bottom: 1rem; }
+.service-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+/* Add these styles to your Home.css file */
+
+.hero-intro-text {
+  display: block;
+  font-weight: 400;
+  font-size: clamp(2rem, 5vw, 3rem); /* Slightly smaller than the dynamic text */
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.hero-dynamic-text {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--color-heading), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/*projectdetails*/
+
+.section-heading {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 4rem;
+  color: var(--heading-color);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  background-color: var(--surface-color);
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+}
+
+.project-image-container {
+  position: relative;
+}
+
+.project-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
+
+.project-link {
+  color: var(--heading-color);
+  background: var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-link {
+    transform: translateY(0);
+}
+
+.project-card:hover .project-link:nth-child(2) {
+    transition-delay: 0.1s;
+}
+
+
+.project-info {
+  padding: 1.5rem;
+}
+
+.project-title {
+  font-size: 1.5rem;
+  color: var(--heading-color);
+}
+
+.project-description {
+  margin: 0.5rem 0 1rem 0;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.project-tag {
+  background-color: rgba(0, 174, 255, 0.1);
+  color: var(--primary-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/*templates*/
+.templates-container { 
+  padding-top: 10rem; 
+  padding-bottom: 5rem; 
+}
+
+.templates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2.5rem;
+}
+
+.template-card {
+  background-color: var(--color-surface);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.template-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.template-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.template-info {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* This makes the card bodies equal height */
+}
+
+.template-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-heading);
+}
+
+.template-info p {
+  flex-grow: 1; /* Pushes buttons to the bottom */
+  margin-bottom: 1rem;
+}
+
+.template-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.template-tags .tag { /* Reusing the tag style from Work.css */
+  background-color: rgba(0, 198, 255, 0.1);
+  color: var(--color-accent);
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+}
+
+.template-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto; /* Pushes buttons to the very bottom */
+}
+
+.demo-button, .buy-button {
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  text-align: center;
+  flex-grow: 1;
+  transition: all 0.3s ease;
+}
+
+.demo-button {
+  background-color: transparent;
+  border: 2px solid var(--color-surface);
+  color: var(--color-text);
+}
+
+.demo-button:hover {
+  background-color: var(--color-surface);
+  color: var(--color-heading);
+}
+
+.buy-button {
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-dark));
+  color: #fff;
+  border: 2px solid transparent;
+}
+
+.buy-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px var(--color-accent);
+}
+
+.templates-intro-text {
+    text-align: center;
+    max-width: 700px;
+    margin: -3rem auto 4rem auto;
+    font-size: 1.1rem;
+    color: var(--color-text);
+}
+
+/*work*/
+.work-container { padding-top: 10rem; padding-bottom: 5rem; }
+.page-subtitle { text-align: center; max-width: 600px; margin: -3rem auto 4rem auto; }
+.work-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+.project-card {
+  background-color: var(--color-surface);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); }
+.project-image { width: 100%; height: 220px; object-fit: cover; }
+.project-info { padding: 1.5rem; }
+.project-category { color: var(--color-accent); font-weight: 600; margin-bottom: 0.5rem; display: block; }
+.project-info h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+.tag { background-color: rgba(0, 198, 255, 0.1); color: var(--color-accent); padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.8rem; }
