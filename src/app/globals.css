@@ -436,3 +436,147 @@ h1, h2, h3, h4 {
 .project-info h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
 .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
 .tag { background-color: rgba(0, 198, 255, 0.1); color: var(--color-accent); padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.8rem; }
+
+
+/* --- Downloads List Page --- */
+/* Styles for the main /downloads page */
+
+.list-container {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 4rem;
+}
+
+.list-item-link {
+  text-decoration: none;
+  color: var(--color-text);
+  transition: transform 0.3s ease;
+  display: block; /* Make the whole area clickable */
+}
+
+.list-item {
+  background-color: var(--color-surface);
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.list-item:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 20px rgba(0, 198, 255, 0.1);
+}
+
+.list-item-link:hover {
+  transform: translateY(-5px);
+}
+
+.list-item h2 {
+  font-size: 1.75rem;
+  color: var(--color-heading);
+  margin-bottom: 0.5rem;
+}
+
+
+/* --- Password Form --- */
+/* Styles for the password prompt on /downloads/[slug] */
+
+.password-form-container {
+  max-width: 450px;
+  margin: 5rem auto;
+  background-color: var(--color-surface);
+  padding: 3rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.password-form-container h2 {
+  font-size: 2rem;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+.password-form-container p {
+  margin-bottom: 2rem;
+}
+
+.password-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-background);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-heading);
+  border-radius: 5px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.password-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.unlock-button {
+  width: 100%;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  text-align: center;
+  transition: all 0.3s ease;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-dark));
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+}
+
+.unlock-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px var(--color-accent);
+}
+
+/* --- Software Details Page --- */
+/* Styles for the content after unlocking */
+
+.software-details-container {
+  padding-top: 10rem;
+  padding-bottom: 5rem;
+}
+
+.software-details-container p {
+  max-width: 800px;
+  margin-bottom: 1rem;
+}
+
+.software-details-container strong {
+  color: var(--color-heading);
+}
+
+.download-button {
+  display: inline-block; /* Allows for margin and padding */
+  margin-top: 2rem;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  text-align: center;
+  transition: all 0.3s ease;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-dark));
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.download-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px var(--color-accent);
+}
+
+/* In globals.css, you can add this with your other page styles */
+
+.downloads-container {
+  padding-top: 10rem; /* Adjust this value to perfectly match your navbar's height */
+}

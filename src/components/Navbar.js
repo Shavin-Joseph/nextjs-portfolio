@@ -21,6 +21,7 @@ function Navbar() {
           <Link href="/" className="nav-item">Home</Link>
           <Link href="/about" className="nav-item">About</Link>
           <Link href="/work" className="nav-item">Work</Link>
+          <Link href="/downloads" className="nav-item">Downloads</Link> {/* ADD THIS LINE */}
           <Link href="/contact" className="nav-item-button">Let's Talk</Link>
         </div>
 
@@ -34,6 +35,7 @@ function Navbar() {
           <Link href="/" className="nav-item-mobile" onClick={closeMobileMenu}>Home</Link>
           <Link href="/about" className="nav-item-mobile" onClick={closeMobileMenu}>About</Link>
           <Link href="/work" className="nav-item-mobile" onClick={closeMobileMenu}>Work</Link>
+           <Link href="/downloads" className="nav-item-mobile" onClick={closeMobileMenu}>Downloads</Link> {/* ADD THIS LINE */}
           <Link href="/contact" className="nav-item-mobile-button" onClick={closeMobileMenu}>Let's Talk</Link>
         </div>
       </nav>
