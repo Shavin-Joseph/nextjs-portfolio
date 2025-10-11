@@ -1,12 +1,10 @@
-"use client"; // The "use client" directive stays here
+"use client";
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image'; // CHANGE 1: Import the Next.js Image component
 import { pageVariants, pageTransition } from '../../animations';
 import { projects } from '../../projectData';
-
-// We REMOVED the metadata export from this file.
-// We also removed the <title>, <meta>, and <link> tags from the JSX, as metadata handles this now.
 
 const WorkClient = () => {
   return (
@@ -24,8 +22,16 @@ const WorkClient = () => {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              {/* ... rest of your project card JSX ... */}
-              <img src={project.image} alt={project.title} className="project-image" />
+              {/* CHANGE 2: Replaced <img> with the optimized <Image> component */}
+              <Image 
+                src={project.image} // Assuming project.image is a path like '/images/project.jpg'
+                alt={project.title} 
+                className="project-image" 
+                // Set width and height to match your project image aspect ratio
+                width={600}
+                height={400}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
               <div className="project-info">
                 <span className="project-category">{project.category}</span>
                 <h3>{project.title}</h3>
