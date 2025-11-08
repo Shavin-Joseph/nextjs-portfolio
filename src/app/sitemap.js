@@ -1,6 +1,5 @@
 // src/app/sitemap.js
-
-import { blogPosts } from './blogData'; // 1. Import your blog data
+import { blogPosts } from '@/blogData';
 
 export default function sitemap() {
   const baseUrl = 'https://shavinjoseph.me';
