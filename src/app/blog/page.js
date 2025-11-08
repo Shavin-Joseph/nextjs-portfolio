@@ -18,6 +18,7 @@ export default function BlogIndexPage() {
 
       <div className="blog-grid">
         {blogPosts.map((post) => (
+          // Each card is a link to the individual article page
           <Link href={`/blog/${post.slug}`} key={post.slug} className="blog-post-card">
             <div className="blog-post-image-container">
               <Image

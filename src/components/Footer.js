@@ -9,10 +9,11 @@ const Footer = () => (
         <h4>Shavin Joseph</h4>
         <p>A digital architect building the future, one line of code at a time.</p>
       </div>
-      <div className="footer-socials">
+      {/*<div className="footer-socials">
         <a href="#"><FaGithub /></a>
         <a href="#"><FaLinkedin /></a>
       </div>
+      */}
     </div>
     <div className="footer-bottom">
       <p>&copy; {new Date().getFullYear()} Shavin Joseph. All Rights Reserved.</p>

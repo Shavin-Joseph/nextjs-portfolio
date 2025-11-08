@@ -4,9 +4,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image'; // CHANGE 1: Import the Next.js Image component
 import { FaReact, FaNodeJs, FaFigma } from 'react-icons/fa';
-import { SiJavascript, SiTypescript } from 'react-icons/si';
+import { SiJavascript, SiPython, SiTypescript } from 'react-icons/si';
 import { pageVariants, pageTransition } from '../../animations';
-import myProfilePic from '@/assets/profile-photo.png';
+
+import myProfilePic from '@/assets/shavin-joseph-web-developer.png';
 
 const AboutClient = () => {
   return (
@@ -42,8 +43,9 @@ const AboutClient = () => {
             {/* CHANGE 3: Replaced <img> with the optimized <Image> component */}
             <Image 
               src={myProfilePic} 
-              alt="A professional headshot of Shavin Joseph" 
+              alt="Shavin Joseph, a professional React web developer and UI/UX designer."
               className="about-image" 
+              priority 
               placeholder="blur"
               // Set width and height to match your image's aspect ratio
               width={400} 
@@ -59,7 +61,7 @@ const AboutClient = () => {
           <div className="tech-grid">
             <motion.div className="tech-card" whileHover={{ y: -5, boxShadow: '0 0 20px rgba(0, 198, 255, 0.2)' }}><FaReact /><span>React</span></motion.div>
             <motion.div className="tech-card" whileHover={{ y: -5, boxShadow: '0 0 20px rgba(0, 198, 255, 0.2)' }}><SiJavascript /><span>JavaScript</span></motion.div>
-            <motion.div className="tech-card" whileHover={{ y: -5, boxShadow: '0 0 20px rgba(0, 198, 255, 0.2)' }}><SiTypescript /><span>TypeScript</span></motion.div>
+            <motion.div className="tech-card" whileHover={{ y: -5, boxShadow: '0 0 20px rgba(0, 198, 255, 0.2)' }}><SiPython /><span>Python</span></motion.div>
             <motion.div className="tech-card" whileHover={{ y: -5, boxShadow: '0 0 20px rgba(0, 198, 255, 0.2)' }}><FaNodeJs /><span>Node.js</span></motion.div>
             <motion.div className="tech-card" whileHover={{ y: -5, boxShadow: '0 0 20px rgba(0, 198, 255, 0.2)' }}><FaFigma /><span>Figma</span></motion.div>
           </div>

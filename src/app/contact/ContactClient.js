@@ -24,11 +24,11 @@ const ContactClient = () => {
             <h3>LinkedIn</h3>
             <p>Connect with me</p>
           </motion.a>
-          <motion.a href="#" className="contact-card" whileHover={{ y: -5 }}>
+         {/* <motion.a href="#" className="contact-card" whileHover={{ y: -5 }}>
             <FaGithub />
             <h3>GitHub</h3>
             <p>See my code</p>
-          </motion.a>
+          </motion.a>*/}
          
 
           <motion.a href="https://www.facebook.com/share/17NaFhzwu4/" className="contact-card" whileHover={{ y: -5 }}>
