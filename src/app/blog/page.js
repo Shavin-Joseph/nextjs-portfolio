@@ -10,6 +10,7 @@ export const metadata = {
   description: "Insights on web development, UI/UX design, and modern technology from Shavin Joseph.",
 };
 
+// THIS IS THE CORRECT CODE FOR YOUR BLOG PAGE (with the cards)
 export default function BlogIndexPage() {
   return (
     <div className="container blog-list-container">
@@ -18,7 +19,6 @@ export default function BlogIndexPage() {
 
       <div className="blog-grid">
         {blogPosts.map((post) => (
-          // Each card is a link to the individual article page
           <Link href={`/blog/${post.slug}`} key={post.slug} className="blog-post-card">
             <div className="blog-post-image-container">
               <Image
