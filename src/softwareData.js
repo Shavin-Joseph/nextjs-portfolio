@@ -19,7 +19,7 @@ export const software = [
     description: 'A new page added named parts. The page is works with a mobile app and helpfull to track part removing process.',
     version: '1.0.1',
     releaseDate: '2025-11-16',
-    filePath: 'https://drive.google.com/file/d/1nBD6BRxkwea_-GbMZa128rzZf6fMsA0V/view?usp=sharing', // Path to the file in the /public folder
+    filePath: 'https://drive.google.com/file/d/1JmLfB_XJE7epMlCETg4Ld-NWfvFAp8Ns/view?usp=sharing', // Path to the file in the /public folder
     passwordKey: 'COOL_APP_PASSWORD', // The key for the password in .env.local
   },
 
