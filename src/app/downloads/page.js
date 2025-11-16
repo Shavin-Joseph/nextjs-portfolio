@@ -27,5 +27,7 @@ export default function DownloadsPage() {
         ))}
       </div>
     </div>
+
+    
   );
 }
