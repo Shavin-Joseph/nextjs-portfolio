@@ -30,7 +30,7 @@ const ScrambleText = ({ text }) => {
   );
 };
 
-// --- ANIMATED NETWORK TOPOLOGY ---
+// --- ANIMATED NETWORK TOPOLOGY (Responsive) ---
 const NetworkTopology = () => {
   const nodes = ['UI', 'API', 'NET', 'IoT', 'SHOP'];
   return (
@@ -277,20 +277,24 @@ const Home = () => {
       <div className="relative z-20 max-w-[1280px] w-full px-6 md:px-12 flex flex-col lg:grid lg:grid-cols-[1.2fr_0.8fr] gap-8 lg:gap-10 items-center pointer-events-none mt-8 lg:mt-0">
         
         {/* Left Side: Text and Content */}
+        {/* Added flex-col to perfectly control the vertical ordering using 'order-1', 'order-2' */}
         <div className="flex flex-col justify-center w-full relative z-10">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="font-mono text-xs md:text-sm tracking-[0.06em] text-[#8a93a6] mb-[2vh]">
+          
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="order-1 font-mono text-xs md:text-sm tracking-[0.06em] text-[#8a93a6] mb-[2vh]">
             <ScrambleText text="// undergraduate — university of colombo" />
           </motion.div>
           
-          <div className="pointer-events-auto w-max">
+          <div className="order-2 pointer-events-auto w-max">
              <HolographicHero />
           </div>
           
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="max-w-[500px] text-[#8a93a6] text-sm md:text-lg leading-relaxed mt-[2vh] relative z-20">
-            I am a professional <strong className="text-[#eef1f6] font-medium">website developer</strong> and <strong className="text-[#eef1f6] font-medium">Android app developer</strong> building full-stack applications using HTML, CSS, JavaScript, and Python. I configure complex <strong className="text-[#eef1f6] font-medium">Cisco network infrastructure</strong>, diagnose hardware issues, and leverage <strong className="text-[#eef1f6] font-medium">AI tools</strong> to create automated digital solutions.
-          </motion.p>
-          
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="flex flex-wrap items-center gap-4 md:gap-6 mt-[4vh] md:mt-[6vh] pointer-events-auto relative z-20">
+          {/* Action Button: Moves directly under the name (order-3) on mobile, and drops to the bottom (order-4) on desktop */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ delay: 0.6 }} 
+            className="order-3 lg:order-4 flex flex-wrap items-center gap-4 md:gap-6 mt-6 lg:mt-[6vh] mb-4 lg:mb-0 pointer-events-auto relative z-20"
+          >
             <Link 
               to="/work" 
               className="group flex items-center gap-3 text-[#eef1f6] font-mono text-[11px] md:text-[13px] tracking-widest uppercase hover:text-[color:var(--theme-main)] transition-colors duration-300"
@@ -307,15 +311,26 @@ const Home = () => {
               Wattala, LK <br/> Active Environment
             </div>
           </motion.div>
+
+          {/* Paragraph: Sits under the button on mobile (order-4), and moves back up under the name on desktop (order-3) */}
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ delay: 0.4 }} 
+            className="order-4 lg:order-3 max-w-[500px] text-[#8a93a6] text-sm md:text-lg leading-relaxed mt-4 lg:mt-[2vh] relative z-20"
+          >
+            I am a professional <strong className="text-[#eef1f6] font-medium">website developer</strong> and <strong className="text-[#eef1f6] font-medium">Android app developer</strong> building full-stack applications using HTML, CSS, JavaScript, and Python. I configure complex <strong className="text-[#eef1f6] font-medium">Cisco network infrastructure</strong>, diagnose hardware issues, and leverage <strong className="text-[#eef1f6] font-medium">AI tools</strong> to create automated digital solutions.
+          </motion.p>
+          
         </div>
 
         {/* Right Side: Network Topology */}
-        {/* Mobile: Absolute position overlapping on the right | Desktop: Standard Grid Item */}
+        {/* Opacity lowered on mobile (opacity-40) so the overlapping text remains perfectly readable */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }} 
           animate={{ opacity: 1, scale: 1 }} 
           transition={{ duration: 1, delay: 0.3 }} 
-          className="absolute right-[-40px] top-[10%] w-[260px] sm:w-[320px] pointer-events-none opacity-80 lg:pointer-events-auto lg:relative lg:right-auto lg:top-auto lg:w-full lg:opacity-100 flex justify-center lg:justify-end z-0 lg:z-10"
+          className="absolute right-[-40px] top-[5%] w-[260px] sm:w-[320px] pointer-events-none opacity-40 sm:opacity-60 lg:pointer-events-auto lg:relative lg:right-auto lg:top-auto lg:w-full lg:opacity-100 flex justify-center lg:justify-end z-0 lg:z-10"
         >
           <NetworkTopology />
         </motion.div>
