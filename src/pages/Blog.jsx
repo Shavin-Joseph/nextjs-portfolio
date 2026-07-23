@@ -2,9 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useMotionTemplate } from 'framer-motion';
 import { Routes, Route, Link, useParams, useNavigate } from 'react-router-dom';
 import { FiHeart, FiEye, FiClock, FiTrendingUp, FiArrowLeft, FiShare2, FiBookOpen } from 'react-icons/fi';
-import { doc, getDoc, setDoc, updateDoc, increment, collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase'; // Ensure your firebase config is correct
-
+import { doc, setDoc, updateDoc, increment, collection, onSnapshot } from 'firebase/firestore';
 
 // --- HARDCODED CONTENT DATABASE (Fast, Secure, Free) ---
  export const HARDCODED_ARTICLES = [
@@ -574,6 +573,7 @@ Frontend development is no longer just "HTML and CSS." It is complex software en
 ];
 
 // --- 1. INDIVIDUAL BLOG POST PAGE (With SEO & Firebase Tracking) ---
+// --- 1. INDIVIDUAL BLOG POST PAGE (With SEO & Firebase Tracking) ---
 const BlogPost = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -581,9 +581,14 @@ const BlogPost = () => {
   
   const [stats, setStats] = useState({ views: 0, likes: 0 });
   const [isLiked, setIsLiked] = useState(false);
+  
+  // 👇 ADD THIS MISSING LINE RIGHT HERE 👇
+  const hasRecordedView = useRef(false); 
 
   useEffect(() => {
     if (!article) return;
+    
+
 
     // 1. INJECT VIRAL SEO METADATA
     document.title = `${article.title} | Shavin Heshan Joseph`;
@@ -605,32 +610,46 @@ const BlogPost = () => {
     setMeta('og:url', window.location.href, true);
     setMeta('og:type', 'article', true);
 
-    // 2. FIREBASE SYNC: Record View
-    const recordView = async () => {
-      const docRef = doc(db, 'articleStats', article.id);
-      const docSnap = await getDoc(docRef);
-      
-      if (docSnap.exists()) {
-        await updateDoc(docRef, { views: increment(1) });
-        setStats({ views: docSnap.data().views + 1, likes: docSnap.data().likes || 0 });
-      } else {
-        await setDoc(docRef, { views: 1, likes: 0 });
-        setStats({ views: 1, likes: 0 });
-      }
-    };
-    recordView();
+const docRef = doc(db, 'articleStats', article.id);
 
-  }, [article]);
+  // 2. REAL-TIME FIREBASE LISTENER (Watches for live changes)
+  const unsubscribe = onSnapshot(docRef, (docSnap) => {
+    if (docSnap.exists()) {
+      setStats({ views: docSnap.data().views || 0, likes: docSnap.data().likes || 0 });
+    }
+  });
 
-  const handleLike = async () => {
-    if (isLiked || !article) return;
-    setIsLiked(true);
-    setStats(prev => ({ ...prev, likes: prev.likes + 1 }));
-    
-    const docRef = doc(db, 'articleStats', article.id);
-    await updateDoc(docRef, { likes: increment(1) });
+// 3. SECURE VIEW COUNTER (Only counts once per session)
+  const recordView = async () => {
+    if (hasRecordedView.current) return;
+    hasRecordedView.current = true;
+
+    try {
+      // Try to increment existing document
+      await updateDoc(docRef, { views: increment(1) });
+    } catch (error) {
+      // If document doesn't exist yet, create it safely
+      await setDoc(docRef, { views: 1, likes: 0 }, { merge: true });
+    }
   };
+  
+  recordView();
 
+  // Cleanup the listener when user leaves the page
+  return () => unsubscribe();
+}, [article]);
+
+const handleLike = async () => {
+  if (isLiked || !article) return;
+  setIsLiked(true); // Instantly update UI for the user
+  
+  const docRef = doc(db, 'articleStats', article.id);
+  try {
+    await updateDoc(docRef, { likes: increment(1) });
+  } catch (error) {
+    await setDoc(docRef, { views: 1, likes: 1 }, { merge: true });
+  }
+};
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);
     alert("Transmission Link Copied!");
@@ -702,16 +721,18 @@ const BlogHome = () => {
   useEffect(() => {
     document.title = "Engineering Logs | Shavin Heshan Joseph";
     
-    const fetchStats = async () => {
-      const querySnapshot = await getDocs(collection(db, "articleStats"));
-      const statsData = {};
-      querySnapshot.forEach((doc) => {
-        statsData[doc.id] = doc.data();
-      });
-      setStats(statsData);
-    };
-    fetchStats();
-  }, []);
+    // REAL-TIME LISTENER FOR ALL BLOGS
+  const unsubscribe = onSnapshot(collection(db, "articleStats"), (snapshot) => {
+    const statsData = {};
+    snapshot.forEach((doc) => {
+      statsData[doc.id] = doc.data();
+    });
+    setStats(statsData);
+  });
+
+  // Cleanup listener on unmount
+  return () => unsubscribe();
+}, []);
 
   const intelligentArticles = HARDCODED_ARTICLES.map(article => ({
     ...article,
