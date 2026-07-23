@@ -49,7 +49,7 @@ const channels = [
     handle: "Josephshavin3@gmail.com", 
     description: "Official electronic mail for formal propositions, architecture breakdowns, and enterprise contracts.",
     icon: <FiMail size={24} />,
-    link: "mailto:shavin@gmail.com",
+    link: "mailto:josephshavin3@gmail.com",
     badge: "Direct Mail",
     color: "from-rose-500/20 to-transparent",
     borderColor: "hover:border-rose-500/50"

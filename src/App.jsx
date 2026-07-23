@@ -10,6 +10,9 @@ import Downloads from './pages/Downloads';
 import Contact from './pages/Contact';
 import Blog from './pages/Blog';
 
+// --- IMPORT THE FOOTER HERE ---
+import Footer from './components/Footer';
+
 // --- THEME ENGINE ---
 const THEMES = {
   red: { main: '#ff5f56', rgb: '255, 95, 86' },
@@ -130,7 +133,6 @@ const NavBar = ({ setTheme }) => {
   const path = location.pathname;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Automatically close the mobile menu when clicking a link
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [path]);
@@ -149,10 +151,8 @@ const NavBar = ({ setTheme }) => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        // Changed container to w-max and added gap-4 for mobile to ensure elements don't get squished
         className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-4 md:gap-0 p-1.5 md:p-2 bg-[#0a0c10]/80 backdrop-blur-[14px] border border-[#f0f4fa]/[0.08] rounded-full shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)] w-max"
       >
-        {/* MacOS Style Theme Switcher Dots (Always Visible) */}
         <div className="flex items-center gap-2 pl-2 md:pl-3 flex-shrink-0">
           <button onClick={() => setTheme('red')} className="w-3 h-3 md:w-3.5 md:h-3.5 rounded-full bg-[#ff5f56] hover:scale-125 transition-transform hover-trigger border border-black/20 shadow-inner" aria-label="Red Theme" />
           <button onClick={() => setTheme('yellow')} className="w-3 h-3 md:w-3.5 md:h-3.5 rounded-full bg-[#ffbd2e] hover:scale-125 transition-transform hover-trigger border border-black/20 shadow-inner" aria-label="Yellow Theme" />
@@ -160,7 +160,6 @@ const NavBar = ({ setTheme }) => {
           <div className="w-[1px] h-5 bg-white/10 ml-2 hidden md:block" />
         </div>
 
-        {/* Desktop Links (Hidden on Mobile) */}
         <div className="hidden md:flex items-center gap-1 md:gap-2 mr-2">
           {navLinks.map((link) => (
             <Link
@@ -177,7 +176,6 @@ const NavBar = ({ setTheme }) => {
           ))}
         </div>
 
-        {/* Desktop CTA Button (Hidden on Mobile) */}
         <div className="hidden md:block">
           <Magnetic>
             <Link 
@@ -189,7 +187,6 @@ const NavBar = ({ setTheme }) => {
           </Magnetic>
         </div>
 
-        {/* Mobile Hamburger Toggle (Flex on Mobile, Hidden on Desktop) */}
         <button 
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="flex md:hidden items-center justify-center w-10 h-10 mr-1 rounded-full bg-white/[0.05] border border-white/10 text-white cursor-pointer hover:bg-white/[0.1] transition-colors"
@@ -202,7 +199,6 @@ const NavBar = ({ setTheme }) => {
         </button>
       </motion.nav>
 
-      {/* Mobile Full-Screen Overlay Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div 
@@ -258,7 +254,6 @@ const App = () => {
   const location = useLocation();
   const [activeTheme, setActiveTheme] = useState('green');
 
-  // Inject CSS Variables globally whenever the theme changes
   useEffect(() => {
     const root = document.documentElement;
     root.style.setProperty('--theme-main', THEMES[activeTheme].main);
@@ -266,10 +261,10 @@ const App = () => {
   }, [activeTheme]);
 
   return (
-    <div className="bg-[#090b0f] text-[#eef1f6] font-sans selection:bg-[var(--theme-main)] selection:text-[#04140c] min-h-screen relative overflow-x-hidden transition-colors duration-500">
+    // 1. ADDED `flex flex-col` HERE to the main wrapper
+    <div className="bg-[#090b0f] text-[#eef1f6] font-sans selection:bg-[var(--theme-main)] selection:text-[#04140c] min-h-screen relative overflow-x-hidden transition-colors duration-500 flex flex-col">
       <CustomCursor />
       
-      {/* Global Background Grid */}
       <div 
         className="fixed inset-0 z-0 pointer-events-none opacity-40 w-full h-full" 
         style={{ 
@@ -283,16 +278,23 @@ const App = () => {
       <GlobalLogo />
       <NavBar setTheme={setActiveTheme} />
 
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/work" element={<Work />} /> 
-          <Route path="/downloads" element={<Downloads />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/blog" element={<Blog />} />
-        </Routes>
-      </AnimatePresence>
+      {/* 2. WRAPPED ROUTES IN `flex-grow` SO FOOTER STAYS AT BOTTOM */}
+      <div className="flex-grow flex flex-col">
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/work" element={<Work />} /> 
+            <Route path="/downloads" element={<Downloads />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/blog/*" element={<Blog />} />
+          </Routes>
+        </AnimatePresence>
+      </div>
+
+      {/* 3. ADDED FOOTER HERE */}
+      <Footer />
+
     </div>
   );
 };
