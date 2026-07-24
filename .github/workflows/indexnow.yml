@@ -1,4 +1,4 @@
-name: Submit URLs to IndexNow
+name: Submit Sitemap to IndexNow
 
 on:
   push:
@@ -10,17 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Submit sitemap URLs to IndexNow
+      - name: Download sitemap
         run: |
+          curl https://shavinjoseph.me/sitemap.xml -o sitemap.xml
+
+      - name: Submit URLs
+        run: |
+
+          URLS=$(grep -oP '(?<=<loc>).*?(?=</loc>)' sitemap.xml | jq -R . | jq -s .)
+
           curl -X POST "https://api.indexnow.org/indexnow" \
           -H "Content-Type: application/json" \
-          -d '{
-            "host": "shavinjoseph.me",
-            "key": "56e6f3fe26ff4e0391d4680d3978b351",
-            "keyLocation": "https://shavinjoseph.me/56e6f3fe26ff4e0391d4680d3978b351.txt",
-            "urlList": [
-              "https://shavinjoseph.me/",
-              "https://shavinjoseph.me/projects",
-              "https://shavinjoseph.me/contact"
-            ]
-          }'
+          -d "{
+            \"host\": \"shavinjoseph.me\",
+            \"key\": \"56e6f3fe26ff4e0391d4680d3978b351\",
+            \"keyLocation\": \"https://shavinjoseph.me/56e6f3fe26ff4e0391d4680d3978b351.txt\",
+            \"urlList\": $URLS
+          }"
