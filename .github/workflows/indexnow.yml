@@ -1,0 +1,26 @@
+name: Submit URLs to IndexNow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Submit sitemap URLs to IndexNow
+        run: |
+          curl -X POST "https://api.indexnow.org/indexnow" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "host": "shavinjoseph.me",
+            "key": "56e6f3fe26ff4e0391d4680d3978b351",
+            "keyLocation": "https://shavinjoseph.me/56e6f3fe26ff4e0391d4680d3978b351.txt",
+            "urlList": [
+              "https://shavinjoseph.me/",
+              "https://shavinjoseph.me/projects",
+              "https://shavinjoseph.me/contact"
+            ]
+          }'
