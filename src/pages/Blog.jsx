@@ -4,6 +4,7 @@ import { Routes, Route, Link, useParams, useNavigate } from 'react-router-dom';
 import { FiHeart, FiEye, FiClock, FiTrendingUp, FiArrowLeft, FiShare2, FiBookOpen } from 'react-icons/fi';
 import { db } from '../firebase'; // Ensure your firebase config is correct
 import { doc, setDoc, updateDoc, increment, collection, onSnapshot } from 'firebase/firestore';
+import { Helmet } from "react-helmet-async";
 
 // --- HARDCODED CONTENT DATABASE (Fast, Secure, Free) ---
  export const HARDCODED_ARTICLES = [
@@ -1222,6 +1223,84 @@ const handleLike = async () => {
   if (!article) return <div className="min-h-screen flex items-center justify-center text-white">Article Not Found</div>;
 
   return (
+    return (
+  <>
+    <Helmet>
+
+      <title>
+        {article.title} | Shavin Heshan Joseph
+      </title>
+
+      <meta
+        name="description"
+        content={article.summary}
+      />
+
+      <meta
+        name="keywords"
+        content={article.tags.join(", ")}
+      />
+
+      <meta
+        property="og:title"
+        content={article.title}
+      />
+
+      <meta
+        property="og:description"
+        content={article.summary}
+      />
+
+      <meta
+        property="og:image"
+        content={article.coverImage}
+      />
+
+      <meta
+        property="og:type"
+        content="article"
+      />
+
+      <link
+        rel="canonical"
+        href={`https://shavinjoseph.me/blog/${article.id}`}
+      />
+
+
+      {/* Google Article Schema */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": article.title,
+          "description": article.summary,
+          "image": article.coverImage,
+          "datePublished": article.date,
+
+          "author": {
+            "@type": "Person",
+            "name": "Shavin Heshan Joseph",
+            "url": "https://shavinjoseph.me"
+          },
+
+          "publisher": {
+            "@type": "Person",
+            "name": "Shavin Heshan Joseph"
+          },
+
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": `https://shavinjoseph.me/blog/${article.id}`
+          },
+
+          "keywords": article.tags.join(", ")
+        })}
+      </script>
+
+
+    </Helmet>
+
+
     <motion.article 
       initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
       className="w-full min-h-screen pt-28 pb-32 md:pt-32 md:pb-24 px-5 md:px-8 max-w-[900px] mx-auto overflow-x-hidden"
